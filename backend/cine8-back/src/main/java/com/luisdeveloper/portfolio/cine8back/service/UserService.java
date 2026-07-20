@@ -2,13 +2,12 @@ package com.luisdeveloper.portfolio.cine8back.service;
 
 import com.luisdeveloper.portfolio.cine8back.entity.User;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import com.luisdeveloper.portfolio.cine8back.repository.UserRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -33,17 +32,18 @@ public class UserService {
     }
 
     public List<User> findAll() {
-
         return userRepository.findAll();
     }
 
 
-    public void findById(Integer id) {
-        userRepository.findById(id);
+    public User findById(Integer id) {
+
+        return userRepository.findById(id).orElseThrow(()-> new RuntimeException("El id de usuario no existe.")) ;
     }
 
-    public void findByemail(String email) {
-        userRepository.findByEmail(email);
+    public Optional<User> findByemail(String email) {
+
+        return userRepository.findByEmail(email);
     }
 
     public void delete(Integer id) {
