@@ -8,7 +8,7 @@
         <version>4.1.0</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.luisdeveloper.portfolio</groupId>
+    <groupId>com.cine8</groupId>
     <artifactId>cine8-back</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>cine8-back</name>

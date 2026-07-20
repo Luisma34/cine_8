@@ -1,4 +1,4 @@
-package com.luisdeveloper.portfolio.cine8back.entity;
+package com.cine8.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

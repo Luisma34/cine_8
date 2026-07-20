@@ -1,6 +1,6 @@
-package com.luisdeveloper.portfolio.cine8back.repository;
+package com.cine8.repository;
 
-import com.luisdeveloper.portfolio.cine8back.entity.Favourite;
+import com.cine8.entity.Favourite;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

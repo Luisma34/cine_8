@@ -1,4 +1,4 @@
-package com.luisdeveloper.portfolio.cine8back;
+package com.cine8;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

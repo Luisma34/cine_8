@@ -1,4 +1,4 @@
-package com.luisdeveloper.portfolio.cine8back.entity;
+package com.cine8.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -21,7 +21,7 @@ public class Rating {
     @Column(nullable = false, name = "ratings_movies")
     private Double ratingsMovies;
 
-    @Column(nullable = false,name = "id_film_api")
+    @Column(nullable = false, name = "id_film_api")
     private Integer idFilmApi;
 
     @ManyToOne(fetch = FetchType.LAZY)
