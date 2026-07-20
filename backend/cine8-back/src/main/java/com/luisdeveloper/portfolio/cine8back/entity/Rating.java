@@ -1,0 +1,30 @@
+package com.luisdeveloper.portfolio.cine8back.entity;
+
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity
+@Table(name = "ratings")
+public class Rating {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
+    @Column(nullable = false, name = "ratings_movies")
+    private Double ratingsMovies;
+
+    @Column(nullable = false,name = "id_film_api")
+    private Integer idFilmApi;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_users", nullable = false)
+    private User idUsers;
+}
