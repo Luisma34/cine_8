@@ -11,7 +11,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
+
 
 @Service
 @RequiredArgsConstructor
@@ -23,7 +23,6 @@ public class UserService {
     // Save user
     public User saveUser(User user) {
 
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
 
         if (userRepository.findByEmail(user.getEmail()).isPresent()) {
             throw new RuntimeException("El email ya está registrado.");
@@ -32,6 +31,8 @@ public class UserService {
         if (userRepository.findByUsername(user.getUsername()).isPresent()) {
             throw new RuntimeException("El username ya existe.");
         }
+
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
 
         return userRepository.save(user);
     }
@@ -80,7 +81,7 @@ public class UserService {
     }
 
     //Update
-    public User updateUser(Integer id, UpdateUserDTO updateUserDTO) {
+    public User updateUser(UpdateUserDTO updateUserDTO) {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
@@ -99,11 +100,11 @@ public class UserService {
             user.setSurnames(updateUserDTO.getSurnames());
         }
 
-        if(updateUserDTO.getUsername() != null) {
+        if (updateUserDTO.getUsername() != null) {
             user.setUsername(updateUserDTO.getUsername());
         }
 
-        if(updateUserDTO.getEmail() != null) {
+        if (updateUserDTO.getEmail() != null) {
             user.setEmail(updateUserDTO.getEmail());
         }
 
