@@ -58,6 +58,7 @@ public class UserService {
             throw new RuntimeException("No autenticado");
         }
 
+        // Usamos el email del token en vez del id para evitar manipulación del cliente
         String email = authentication.getName();
 
         User user = userRepository.findByEmail(email).orElseThrow(() -> new RuntimeException("El email no existe."));
@@ -70,5 +71,18 @@ public class UserService {
         userRepository.save(user);
     }
 
-    // Falta el método update
+    public User updateUser(Integer id,User newUser) {
+
+        User exist = findById(id);
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        if (authentication == null || !authentication.isAuthenticated()) {
+            throw new RuntimeException("No autenticado");
+        }
+
+        return userRepository.save(newUser);
+
+    }
+
 }
