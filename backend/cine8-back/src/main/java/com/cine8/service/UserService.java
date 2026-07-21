@@ -1,5 +1,7 @@
 package com.cine8.service;
 
+import com.cine8.dto.ChangePasswordDTO;
+import com.cine8.dto.UpdateUserDTO;
 import com.cine8.entity.User;
 import com.cine8.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +20,7 @@ public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
+    // Save user
     public User saveUser(User user) {
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
@@ -33,14 +36,17 @@ public class UserService {
         return userRepository.save(user);
     }
 
+    // Find All
     public List<User> findAll() {
         return userRepository.findAll();
     }
 
+    // Find by id
     public User findById(Integer id) {
         return userRepository.findById(id).orElseThrow(() -> new RuntimeException("El id de usuario no existe."));
     }
 
+    // Find by email
     public User findByEmail(String email) {
         return userRepository.findByEmail(email).orElseThrow(() -> new RuntimeException("El email no existe."));
     }
@@ -49,7 +55,8 @@ public class UserService {
         userRepository.deleteById(id);
     }
 
-    public void changePassword(String oldPassword, String newPassword) {
+    // Change Password
+    public void changePassword(ChangePasswordDTO requestPasswordDTO) {
 
         // Obtiene el usuario autenticado del contexto de seguridad de Spring
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -63,17 +70,17 @@ public class UserService {
 
         User user = userRepository.findByEmail(email).orElseThrow(() -> new RuntimeException("El email no existe."));
 
-        if (!passwordEncoder.matches(oldPassword, user.getPassword())) {
+        if (!passwordEncoder.matches(requestPasswordDTO.getOldPassword(), user.getPassword())) {
             throw new RuntimeException("La contraseña actual no es correcta.");
         }
 
-        user.setPassword(passwordEncoder.encode(newPassword));
+
+        user.setPassword(passwordEncoder.encode(requestPasswordDTO.getNewPassword()));
         userRepository.save(user);
     }
 
-    public User updateUser(Integer id,User newUser) {
-
-        User exist = findById(id);
+    //Update
+    public User updateUser(Integer id, UpdateUserDTO updateUserDTO) {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
@@ -81,8 +88,26 @@ public class UserService {
             throw new RuntimeException("No autenticado");
         }
 
-        return userRepository.save(newUser);
+        String email = authentication.getName();
+        User user = userRepository.findByEmail(email).orElseThrow(() -> new RuntimeException("El email no existe."));
 
+        if (updateUserDTO.getName() != null) {
+            user.setName(updateUserDTO.getName());
+        }
+
+        if (updateUserDTO.getSurnames() != null) {
+            user.setSurnames(updateUserDTO.getSurnames());
+        }
+
+        if(updateUserDTO.getUsername() != null) {
+            user.setUsername(updateUserDTO.getUsername());
+        }
+
+        if(updateUserDTO.getEmail() != null) {
+            user.setEmail(updateUserDTO.getEmail());
+        }
+
+        return userRepository.save(user);
     }
 
 }

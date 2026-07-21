@@ -6,7 +6,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class Register {
+public class RegisterDTO {
 
     @NotBlank
     private String name;
