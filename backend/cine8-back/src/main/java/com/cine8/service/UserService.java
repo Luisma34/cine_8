@@ -32,6 +32,7 @@ public class UserService {
             throw new RuntimeException("El username ya existe.");
         }
 
+        user.setRole("USER");
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 
         return userRepository.save(user);
