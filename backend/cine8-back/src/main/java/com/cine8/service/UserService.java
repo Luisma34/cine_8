@@ -53,8 +53,22 @@ public class UserService {
         return userRepository.findByEmail(email).orElseThrow(() -> new RuntimeException("El email no existe."));
     }
 
-    public void delete(Integer id) {
+    public void deleteById(Integer id) {
         userRepository.deleteById(id);
+    }
+
+    public void deleteByEmail() {
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        if (authentication == null || !authentication.isAuthenticated()) {
+            throw new RuntimeException("No autenticado");
+        }
+
+       String authEmail = authentication.getName();
+
+
+        userRepository.deleteByEmail(authEmail);
     }
 
     // Change Password
