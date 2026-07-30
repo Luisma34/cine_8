@@ -13,5 +13,5 @@ public class UserController {
 
     private UserService userService;
 
-    @PreAuthorize("hasAny")
+
 }
