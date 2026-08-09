@@ -5,6 +5,7 @@ import com.cine8.dto.UpdateUserDTO;
 import com.cine8.entity.User;
 import com.cine8.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -38,17 +39,17 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    // Find All
+
     public List<User> findAll() {
         return userRepository.findAll();
     }
 
-    // Find by id
+
     public User findById(Integer id) {
         return userRepository.findById(id).orElseThrow(() -> new RuntimeException("El id de usuario no existe."));
     }
 
-    // Find by email
+
     public User findByEmail(String email) {
         return userRepository.findByEmail(email).orElseThrow(() -> new RuntimeException("El email no existe."));
     }
