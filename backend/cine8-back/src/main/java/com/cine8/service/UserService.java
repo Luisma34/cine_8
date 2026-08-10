@@ -39,25 +39,28 @@ public class UserService {
         return userRepository.save(user);
     }
 
-
+    // Find All
     public List<User> findAll() {
         return userRepository.findAll();
     }
 
-
+    //Find ID
     public User findById(Integer id) {
         return userRepository.findById(id).orElseThrow(() -> new RuntimeException("El id de usuario no existe."));
     }
 
-
+    //Find Email
     public User findByEmail(String email) {
         return userRepository.findByEmail(email).orElseThrow(() -> new RuntimeException("El email no existe."));
     }
 
+    //Delete ID
     public void deleteById(Integer id) {
         userRepository.deleteById(id);
     }
 
+
+    // Delete email
     public void deleteByEmail() {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -82,7 +85,7 @@ public class UserService {
             throw new RuntimeException("No autenticado");
         }
 
-        // Usamos el email del token en vez del id para evitar manipulación del cliente
+        // Usamos el email del token en vez del id para evitar manipulación del cliente.
         String email = authentication.getName();
 
         User user = userRepository.findByEmail(email).orElseThrow(() -> new RuntimeException("El email no existe."));

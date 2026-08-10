@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: cine8-back
+  datasource:
+    url: "jdbc:postgresql://localhost:5432/YOUR_DB_NAME"
+    username: YOUR_DB_USER
+    password: YOUR_DB_PASSWORD
+    driver-class-name: org.postgresql.Driver
