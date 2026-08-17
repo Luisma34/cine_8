@@ -1,6 +1,7 @@
 package com.cine8.controller;
 
 
+import com.cine8.entity.Favourite;
 import com.cine8.entity.User;
 import com.cine8.repository.UserRepository;
 import com.cine8.service.FavouriteService;
@@ -9,6 +10,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/favourite")
@@ -47,5 +50,16 @@ public class FavouriteController {
         return ResponseEntity.noContent().build();
 
 
+    }
+
+    @GetMapping
+    public ResponseEntity<List<Favourite>> findAll() {
+
+        String authUser = SecurityContextHolder.getContext().getAuthentication().getName();
+
+        User user = userService.findByEmail(authUser);
+        Integer userId = user.getId();
+
+        return ResponseEntity.ok(favouriteService.getAllFavourites(userId));
     }
 }

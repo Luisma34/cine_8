@@ -4,12 +4,14 @@ import com.cine8.entity.Favourite;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
 public interface FavouriteRepository extends JpaRepository<Favourite, Integer> {
 
-    Optional<Favourite> findByIdUsers(Integer idUsers);
+    // Anotación para buscar todas las películas favoritas de un usuario específico por su ID.
+    List<Favourite> findByIdUsers(Integer idUsers);
 
     Optional<Favourite> findByIdFilmApi(Integer idFilmApi);
 

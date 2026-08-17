@@ -26,14 +26,14 @@ public class UserController {
     }
 
     @PreAuthorize("hasRole('ADMIN')")
-    @GetMapping
+    @GetMapping("/{email}")
     public ResponseEntity<User> findByEmail(@PathVariable String email) {
         return ResponseEntity.ok(userService.findByEmail(email));
     }
 
 
     @PreAuthorize("hasRole('ADMIN')")
-    @GetMapping
+    @GetMapping("/{id}")
     public ResponseEntity<User> findById(@PathVariable Integer id) {
         return ResponseEntity.ok(userService.findById(id));
     }

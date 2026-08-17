@@ -5,7 +5,11 @@ import com.cine8.entity.User;
 import com.cine8.repository.FavouriteRepository;
 import com.cine8.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
+
+import java.util.List;
 
 
 @Service
@@ -36,6 +40,14 @@ public class FavouriteService {
 
         favouriteRepository.delete(filmDelete);
 
+    }
+
+    public List<Favourite> getAllFavourites(Integer idUser) {
+
+        userRepository.findById(idUser)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado."));
+
+        return favouriteRepository.findByIdUsers(idUser);
     }
 
 }
