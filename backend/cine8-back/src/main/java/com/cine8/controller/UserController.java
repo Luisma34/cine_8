@@ -48,7 +48,7 @@ public class UserController {
     @DeleteMapping("/me")
     public ResponseEntity<Void> deleteMyAccount() {
         userService.deleteByEmail();
-        return ResponseEntity.noContent().build(); // 204
+        return ResponseEntity.noContent().build();
     }
 
     @PutMapping("/me/password")

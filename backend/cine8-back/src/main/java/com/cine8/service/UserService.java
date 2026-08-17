@@ -5,7 +5,6 @@ import com.cine8.dto.UpdateUserDTO;
 import com.cine8.entity.User;
 import com.cine8.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
