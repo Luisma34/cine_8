@@ -24,7 +24,7 @@ public class UserService {
     public User saveUser(User user) {
 
 
-        if (userRepository.findByEmail(user.getEmail()).isPresent()) {
+        if (userRepository.findByEmail().isPresent()) {
             throw new RuntimeException("El email ya está registrado.");
         }
 
@@ -50,7 +50,7 @@ public class UserService {
 
     //Find Email
     public User findByEmail(String email) {
-        return userRepository.findByEmail(email).orElseThrow(() -> new RuntimeException("El email no existe."));
+        return userRepository.findByEmail().orElseThrow(() -> new RuntimeException("El email no existe."));
     }
 
     //Delete ID
@@ -87,7 +87,7 @@ public class UserService {
         // Usamos el email del token en vez del id para evitar manipulación del cliente.
         String email = authentication.getName();
 
-        User user = userRepository.findByEmail(email).orElseThrow(() -> new RuntimeException("El email no existe."));
+        User user = userRepository.findByEmail().orElseThrow(() -> new RuntimeException("El email no existe."));
 
         if (!passwordEncoder.matches(requestPasswordDTO.getOldPassword(), user.getPassword())) {
             throw new RuntimeException("La contraseña actual no es correcta.");
@@ -108,7 +108,7 @@ public class UserService {
         }
 
         String email = authentication.getName();
-        User user = userRepository.findByEmail(email).orElseThrow(() -> new RuntimeException("El email no existe."));
+        User user = userRepository.findByEmail().orElseThrow(() -> new RuntimeException("El email no existe."));
 
         if (updateUserDTO.getName() != null) {
             user.setName(updateUserDTO.getName());
